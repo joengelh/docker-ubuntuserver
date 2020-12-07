@@ -1,2 +1,3 @@
-sudo docker run joengelh/dockerhub-ubuntuserver:latest
-sudo docker ps -a | head
+sudo docker run -d joengelh/dockerhub-ubuntuserver:latest
+container_name=$(sudo docker ps -a | head -n 2 | tail -n 1 | grep -oE '[^ ]+$')
+sudo docker port $container_name 22

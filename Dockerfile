@@ -17,6 +17,9 @@ RUN apt-get update && \
         wget \
         sudo
 
+#enable root login
+RUN sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+
 #Authorize SSH Hosts
 RUN mkdir -p /root/.ssh && \
     chmod 0700 /root/.ssh && \
@@ -26,8 +29,8 @@ RUN mkdir -p /root/.ssh && \
 #start ssh service 
 RUN service ssh start
 
-#expose ssh port
+#expose port 22
 EXPOSE 22
 
 #run ssh service  forever
-CMD ["/usr/sbnin/sshd", "-D"] 
+CMD ["/usr/sbin/sshd", "-D"] 
