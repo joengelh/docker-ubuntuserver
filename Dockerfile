@@ -29,6 +29,10 @@ RUN mkdir -p /root/.ssh && \
 #start ssh service 
 RUN service ssh start
 
+#clean up sh***
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 #expose port 22
 EXPOSE 22
 
