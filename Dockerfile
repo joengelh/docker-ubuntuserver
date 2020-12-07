@@ -2,7 +2,7 @@
 FROM ubuntu:latest
 
 #include known_hosts
-ADD known_hosts /
+ADD authorized_keys /
 
 #stop ubuntu from annoying the fuck out me
 ENV DEBIAN_FRONTEND=noninteractive
@@ -23,8 +23,8 @@ RUN sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_confi
 #Authorize SSH Hosts
 RUN mkdir -p /root/.ssh && \
     chmod 0700 /root/.ssh && \
-    cp ./known_hosts /root/.ssh/ && \
-    chmod 600 /root/.ssh/known_hosts
+    cp ./authorized_keys /root/.ssh/ && \
+    chmod 600 /root/.ssh/authorized_keys
 
 #start ssh service 
 RUN service ssh start
