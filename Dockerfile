@@ -1,9 +1,6 @@
 #use latest Ubuntu Container
 FROM ubuntu:latest
 
-#include shell scripts scripts
-ADD nirvana.sh /
-
 #include known_hosts
 ADD known_hosts /
 
@@ -17,7 +14,8 @@ RUN apt-get update && \
         openssh-server \
         vim \
         htop \
-        wget
+        wget \
+        sudo
 
 #Authorize SSH Hosts
 RUN mkdir -p /root/.ssh && \
@@ -25,5 +23,11 @@ RUN mkdir -p /root/.ssh && \
     cp ./known_hosts /root/.ssh/ && \
     chmod 600 /root/.ssh/known_hosts
 
-#run etnernal nirvana script
-CMD ["bash", "./nirvana.sh"]
+#start ssh service 
+RUN service ssh start
+
+#expose ssh port
+EXPOSE 22
+
+#run ssh service  forever
+CMD ["/usr/sbnin/sshd", "-D"] 
