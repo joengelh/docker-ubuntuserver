@@ -3,6 +3,7 @@ version: '3'
 services:
   ubuntu:
    image: joengelh/dockerhub-ubuntuserver:latest
+   restart: always
    container_name: ubuntu-ssh
    ports:
    - "10000:22"
