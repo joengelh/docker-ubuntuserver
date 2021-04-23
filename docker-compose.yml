@@ -7,4 +7,4 @@ services:
    network_mode: "host"
    restart: always
    ports:
-   - 10000:22
+   - "10000:22"
