@@ -1,5 +1,5 @@
 #use latest Ubuntu Container
-FROM ubuntu:20.04
+FROM ubuntu:latest
 
 #include known_hosts
 ADD authorized_keys /

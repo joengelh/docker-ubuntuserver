@@ -2,9 +2,7 @@ version: '3'
 
 services:
   ubuntu:
-   image: joengelh/dockerhub-ubuntuserver:latest 
+   image: joengelh/dockerhub-ubuntuserver:latest
    container_name: ubuntu-ssh
-   network_mode: "host"
-   restart: always
    ports:
    - "10000:22"
