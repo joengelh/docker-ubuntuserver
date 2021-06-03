@@ -7,16 +7,41 @@ ADD authorized_keys /
 #stop ubuntu from annoying the fuck out me
 ENV DEBIAN_FRONTEND=noninteractive
 
-#install api python module
-RUN apt-get update && \
-    apt-get install -y \
-        git \
-        ssh \
-        vim \
-        htop \
-        wget \
-        sudo \
-        nfs-common
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+       apt-utils \
+       build-essential \
+       locales \
+       ssh \
+       vim \
+       htop \
+       wget \
+       sudo \
+       nfs-common \      
+       libffi-dev \
+       git \
+       libssl-dev \
+       libyaml-dev \
+       python3-dev \
+       python3-setuptools \
+       python3-pip \
+       python3-apt \
+       python3-yaml \
+       software-properties-common \
+       rsyslog systemd systemd-cron sudo iproute2 \
+    && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN sed -i 's/^\($ModLoad imklog\)/#\1/' /etc/rsyslog.conf
+
+RUN rm -f /lib/systemd/system/systemd*udev* \
+  && rm -f /lib/systemd/system/getty.target
+
+# Fix potential UTF-8 errors with ansible-test.
+RUN locale-gen en_US.UTF-8
+
+# Install Ansible via Pip.
+RUN pip3 install --no-cache-dir $ansible
 
 #create wheel group and give sudoless password permissions
 RUN groupadd wheel && \
@@ -38,7 +63,6 @@ RUN mkdir -p .ssh/ && \
 
 #clean up sh***
 RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 #start ssh service 
 RUN service ssh start
