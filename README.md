@@ -1,5 +1,5 @@
 # docker-ubuntuserver
-contianer which can be used for testing on ubuntu, ssh enabled.
+contianer which can be used for testing with ansible, ssh enabled.
 
 place your public ssh key in ``authorized_keys`` and run 
 ``docker-compose up -d``.
