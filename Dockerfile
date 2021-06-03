@@ -28,14 +28,15 @@ RUN apt-get update \
        python3-apt \
        python3-yaml \
        software-properties-common \
-       rsyslog systemd systemd-cron sudo iproute2 \
-    && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-RUN sed -i 's/^\($ModLoad imklog\)/#\1/' /etc/rsyslog.conf
+       rsyslog systemd systemd-cron sudo iproute2 && \
+       rm -Rf /usr/share/doc && \
+       rm -Rf /usr/share/man && \
+       apt-get clean && \
+       rm -Rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+       sed -i 's/^\($ModLoad imklog\)/#\1/' /etc/rsyslog.conf
 
-RUN rm -f /lib/systemd/system/systemd*udev* \
-  && rm -f /lib/systemd/system/getty.target
+RUN rm -f /lib/systemd/system/systemd*udev* && \
+    rm -f /lib/systemd/system/getty.target
 
 # Fix potential UTF-8 errors with ansible-test.
 RUN locale-gen en_US.UTF-8
