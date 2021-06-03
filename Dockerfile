@@ -42,7 +42,7 @@ RUN rm -f /lib/systemd/system/systemd*udev* && \
 RUN locale-gen en_US.UTF-8
 
 # Install Ansible via Pip.
-RUN pip3 install --no-cache-dir $ansible
+RUN pip3 install --no-cache-dir ansible
 
 #create wheel group and give sudoless password permissions
 RUN groupadd wheel && \
