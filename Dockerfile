@@ -32,8 +32,7 @@ RUN apt-get update \
        rm -Rf /usr/share/doc && \
        rm -Rf /usr/share/man && \
        apt-get clean && \
-       rm -Rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-       sed -i 's/^\($ModLoad imklog\)/#\1/' /etc/rsyslog.conf
+       rm -Rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN rm -f /lib/systemd/system/systemd*udev* && \
     rm -f /lib/systemd/system/getty.target
@@ -61,9 +60,6 @@ RUN mkdir -p .ssh/ && \
     mv /authorized_keys .ssh/ && \
     chmod 600 .ssh/authorized_keys && \
     chown -R ansible:wheel .ssh/
-
-#clean up sh***
-RUN apt-get clean && \
 
 #start ssh service 
 RUN service ssh start
