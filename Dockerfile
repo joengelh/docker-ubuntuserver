@@ -17,7 +17,6 @@ RUN apt-get update \
        htop \
        wget \
        sudo \
-       nfs-common \      
        libffi-dev \
        git \
        libssl-dev \
