@@ -39,6 +39,9 @@ RUN rm -f /lib/systemd/system/systemd*udev* && \
 # Fix potential UTF-8 errors with ansible-test.
 RUN locale-gen en_US.UTF-8
 
+# Upgrade Pip to latest version working properly with Python2
+RUN python -m pip install --no-cache-dir --upgrade "pip < 21.0"
+
 # Install Ansible via Pip.
 RUN pip3 install --no-cache-dir ansible
 
