@@ -1,4 +1,4 @@
-# docker-rockyserver
+# docker-ubuntuserver
 contianer which can be used for testing with ansible, ssh enabled.
 
 in order to reach the container run
